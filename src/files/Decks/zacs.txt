@@ -1,0 +1,77 @@
+1 Selesnya Signet
+1 Wood Elves
+1 Pyrohemia
+8 Mountain
+1 Rampant Growth
+1 Explosive Vegetation
+1 Selesnya Guildgate
+1 Armillary Sphere
+1 Khalni Garden
+1 Roiling Regrowth
+1 Annoyed Altisaur
+1 Mwonvuli Acid-Moss
+1 Yavimaya Elder
+1 Bloodbraid Elf
+7 Plains
+1 Revive
+1 Stone Quarry
+1 Rampaging Brontodon
+1 Boros Guildgate
+1 Crop Rotation
+1 Ranger's Path
+1 Farseek
+1 Kodama's Reach
+1 Rolling Thunder
+1 Boros Signet
+1 Atzocan Seer
+1 Three Visits
+1 Up the Beanstalk
+1 Journey of Discovery
+1 Citanul Woodreaders
+1 Sylvan Scrying
+1 Entish Restoration
+1 Gaea's Touch
+1 Fertile Thicket
+12 Forest
+1 Grow from the Ashes
+1 Pyroclasm
+1 Utopia Sprawl
+1 Rhythm of the Wild
+1 Treetop Village
+1 Blighted Woodland
+1 Bigger on the Inside
+1 Druid of the Cowl
+1 Veil of Summer
+1 Circuitous Route
+1 Destiny Spinner
+1 Tireless Provisioner
+1 Elvish Pioneer
+1 Forgotten Cave
+1 Springbloom Druid
+1 Temple of the False God
+1 Harrow
+1 Wayfarer's Bauble
+1 Ley Weaver
+1 Reap and Sow
+1 Primal Growth
+1 Skyshroud Claim
+1 Price of Glory
+1 Gruul Guildgate
+1 Entourage of Trest
+1 Wing Shards
+1 Search for Tomorrow
+1 Abundant Growth
+1 Maelstrom Colossus
+1 Explore
+1 Cultivate
+1 Llanowar Elves
+1 Skyline Despot
+1 Tranquil Expanse
+1 Wilderness Reclamation
+1 Lightning Greaves
+1 Sakura-Tribe Elder
+1 Traveler's Amulet
+1 Command Tower
+1 Summer Bloom
+
+1 Zacama, Primal Calamity

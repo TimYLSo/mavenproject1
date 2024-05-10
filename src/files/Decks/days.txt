@@ -1,0 +1,101 @@
+1 Bayou
+1 Vampiric Tutor
+1 Flooded Strand
+1 Green Sun's Zenith
+1 Tyrranax Rex
+1 Lórien Revealed
+1 Polluted Delta
+1 Fatal Push
+1 White Plume Adventurer
+1 Natural Order
+1 Endurance
+1 Prismatic Vista
+1 Delighted Halfling
+1 Urborg, Tomb of Yawgmoth
+1 Baleful Strix
+1 Path to Exile
+1 Collector Ouphe
+1 Tundra
+1 Sylvan Caryatid
+1 Biophagus
+1 Arid Mesa
+1 Worldly Tutor
+1 Reanimate
+1 Scrubland
+1 Mox Sapphire
+1 Sheoldred, the Apocalypse
+1 Snow-Covered Island
+1 Overgrown Tomb
+1 Teferi, Time Raveler
+1 Scavenging Ooze
+1 Fiend Artisan
+1 Windswept Heath
+1 Allosaurus Shepherd
+1 Preordain
+1 Gitaxian Probe
+1 Snow-Covered Forest
+1 Scalding Tarn
+1 Thieving Skydiver
+1 Opposition Agent
+1 Llanowar Elves
+1 Verdant Catacombs
+1 Deathrite Shaman
+1 Mother of Runes
+1 Abrupt Decay
+1 Undermountain Adventurer
+1 Witherbloom Command
+1 Ice-Fang Coatl
+1 Snow-Covered Swamp
+1 Fauna Shaman
+1 Misty Rainforest
+1 Blooming Marsh
+1 Zagoth Triome
+1 Troll of Khazad-dûm
+1 Ponder
+1 Spara's Headquarters
+1 Leovold, Emissary of Trest
+1 Atraxa, Grand Unifier
+1 Legolas's Quick Reflexes
+1 Faerie Mastermind
+1 Grief
+1 Underground Sea
+1 Eldritch Evolution
+1 Tropical Island
+1 Birthing Pod
+1 Neoform
+1 Veil of Summer
+1 Savannah
+1 Mox Emerald
+1 Cankerbloom
+1 Bloodstained Mire
+1 Breeding Pool
+1 Snapcaster Mage
+1 Marsh Flats
+1 Boseiju, Who Endures
+1 Ignoble Hierarch
+1 Karakas
+1 Tarmogoyf
+1 Wasteland
+1 Noble Hierarch
+1 Seasoned Dungeoneer
+1 Tishana's Tidebinder
+1 Grist, the Hunger Tide
+1 Sylvan Library
+1 Oko, Thief of Crowns
+1 Yavimaya, Cradle of Growth
+1 Coiling Oracle
+1 Assassin's Trophy
+1 Birds of Paradise
+1 Brainstorm
+1 Eladamri's Call
+1 Wargate
+1 Snow-Covered Plains
+1 Indatha Triome
+1 Swords to Plowshares
+1 Temple Garden
+1 Wooded Foothills
+1 Elvish Mystic
+1 Uro, Titan of Nature's Wrath
+1 Orcish Bowmasters
+1 Botanical Sanctum
+
