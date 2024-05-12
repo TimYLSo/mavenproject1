@@ -1,3 +1,4 @@
 
 src/files/oracle-cards-20240412210228.json
 src/main/java/com/mycompany/mavenproject1/database/default-cards-20240411210926.json
+*.json
