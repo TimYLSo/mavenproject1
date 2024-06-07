@@ -4,9 +4,12 @@
  */
 package gui.basePanels;
 
-import gui.LinkButton;
+import gui.buttons.LinkButton;
 import gui.MainMenu;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -15,8 +18,20 @@ import javax.swing.JPanel;
 public class AppPanel extends JPanel {
 
     LinkButton returnButton = new LinkButton("Return To Menu", MainMenu.class);
-
+JPanel topPanel = new JPanel();
+ JPanel mainPanel = new JPanel();
     public AppPanel() {
-        add(returnButton);
+           setLayout(new BorderLayout());
+           
+        topPanel.setLayout(new BorderLayout());
+        topPanel.add(returnButton, BorderLayout.WEST);
+         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        add(topPanel, BorderLayout.NORTH);
+        add(mainPanel, BorderLayout.CENTER);
+        
+    }
+    public JPanel getMainPanel(){
+    return mainPanel;
     }
 }

@@ -4,9 +4,11 @@
  */
 package gui;
 
+import gui.buttons.LinkButton;
 import gui.navigationpanels.*;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -21,9 +23,12 @@ public class MainMenu extends JPanel {
     JButton CreateDeckButton = new LinkButton("Create Deck",CreateDeckPanel.class);
     JButton ImportListButton = new LinkButton("Import List",ImportListPanel.class);
     JButton ExportListButton = new LinkButton("Export List",ExportListPanel.class);
+    JLabel IntroMessage = new JLabel("Welcome to the mtgCardManager.");
 
     public MainMenu() {
+        
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(IntroMessage);
         this.add(ViewDecksButton);
         this.add(ExportDecksButton);
         this.add(ImportDecksButton);

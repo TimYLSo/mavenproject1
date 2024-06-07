@@ -4,11 +4,19 @@
  */
 package gui.basePanels;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author User
  */
 public class UploadsPanel extends AppPanel {
     protected String filePath;
+            JFileChooser chooser = new JFileChooser();
+            File file = chooser.getSelectedFile();
+    public UploadsPanel() {
+        add(chooser);
+    }
     
 }
