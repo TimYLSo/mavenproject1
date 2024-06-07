@@ -11,7 +11,7 @@ import database.JSONCardDatabase;
 import models.Card;
 import groupmanager.CollectionsManager;
 import groupmanager.DecksManager;
-import gui.MainMenu;
+import gui.MainFrame;
 import java.util.Scanner;
 
 /**
@@ -26,7 +26,7 @@ public static DecksManager allDecks = new DecksManager(deckspath,database);
 
 
     public static void main(String[] args) {
-             MainMenu menu = new MainMenu();
+             MainFrame menu = new MainFrame();
         menu.setVisible(true);
     }
 }

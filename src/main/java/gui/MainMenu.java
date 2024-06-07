@@ -4,57 +4,32 @@
  */
 package gui;
 
+import gui.navigationpanels.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 /**
  *
  * @author User
  */
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class MainMenu extends JPanel {
 
-public class MainMenu extends JFrame {
-
-    private JPanel userPanel = new JPanel();
-    private JPanel calcPanel = new JPanel();
-    private JLabel uName = new JLabel("Username: ");
-    private JLabel pWord = new JLabel("Password: ");
-    private JTextField unInput = new JTextField(10);
-    private JTextField pwInput = new JTextField(10);
-    private JTextField usernameField;
-    private JPasswordField passwordField;
+    LinkButton ViewDecksButton = new LinkButton("View Decks",ViewDecksPanel.class);
+    JButton ExportDecksButton = new LinkButton("Export Decks",ExportDecksPanel.class);
+    JButton ImportDecksButton = new LinkButton("Import Decks",UploadDecksPanel.class);
+    JButton CreateDeckButton = new LinkButton("Create Deck",CreateDeckPanel.class);
+    JButton ImportListButton = new LinkButton("Import List",ImportListPanel.class);
+    JButton ExportListButton = new LinkButton("Export List",ExportListPanel.class);
 
     public MainMenu() {
-        setTitle("Main menu");
-        setSize(800, 800);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-
-        JLabel usernameLabel = new JLabel("Username:");
-        JLabel passwordLabel = new JLabel("Password:");
-        usernameField = new JTextField();
-        passwordField = new JPasswordField();
-        usernameField.setColumns(100);
-
-        JButton ViewDecksButton = new JButton("View Decks");
-        JButton ExportDecksButton = new JButton("Export Decks");
-        JButton ImportDecksButton = new JButton("Import Decks");
-        JButton CreateDeckButton = new JButton("Create Deck");
-        JButton ImportListButton = new JButton("Import List");
-        JButton ExportListButton = new JButton("Export List");
-
-        buttonPanel.add(ViewDecksButton);
-        buttonPanel.add(ExportDecksButton);
-        buttonPanel.add(ImportDecksButton);
-        buttonPanel.add(ImportListButton);
-        buttonPanel.add(ExportListButton);
-        buttonPanel.add(CreateDeckButton);
-
-        add(buttonPanel);
-        Frame[] frames = Frame.getFrames();
-
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(ViewDecksButton);
+        this.add(ExportDecksButton);
+        this.add(ImportDecksButton);
+        this.add(ImportListButton);
+        this.add(ExportListButton);
+        this.add(CreateDeckButton);
     }
+
 }
