@@ -10,6 +10,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import models.OracleCard;
 
 /**
  *
@@ -19,6 +20,7 @@ public class DBTesting {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
         //DerbyDatabase dbManager = new DerbyDatabase();
@@ -31,6 +33,8 @@ public class DBTesting {
         //If it's an embedded database: You will find: org.apache.derby.impl.jdbc.EmbedConnection40@681384962 (XID = 16), (SESSIONID = 1), (DATABASE = CarDB), (DRDAID = null) 
         //That means: Connection conn = new EmbedConnection40(); 
         cardDB.getConnection().commit();
+        OracleCard card = cardDB.findCardByName("force of will");
+        System.out.println("card : " + card);
         DatabaseMetaData dbmd = cardDB.getConnection().getMetaData();
         System.out.println("Database product name : " + dbmd.getDatabaseProductName());
         System.out.println("Database version : " + dbmd.getDatabaseProductVersion());

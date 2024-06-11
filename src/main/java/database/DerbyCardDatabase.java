@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.NoSuchElementException;
@@ -48,7 +49,7 @@ public class DerbyCardDatabase extends CardDatabase {
 
             JSONArray jsonCardList = new JSONArray(jsonTokener);
             String newTableName = "ORACLECARDS";
-            Statement statement = dbManager.getConnection().createStatement();
+            Statement statement = getConnection().createStatement();
             if (tableExists(newTableName, statement)) {
                 String sqlDrop = "DROP TABLE " + newTableName;
                 statement.executeUpdate(sqlDrop);
@@ -56,8 +57,8 @@ public class DerbyCardDatabase extends CardDatabase {
             String sqlCreate = "create table " + newTableName + " (ScryfallID varchar(50) not null,"
                     + "Name varchar(150), OracleID varchar(50),"
                     + "OracleText varchar(2000), ManaCost varchar(50),SetName varchar(100),"
-                    + "SetCode varchar(5), PRIMARY KEY (ScryfallID))";
-            String sqlInsert = "INSERT INTO " + newTableName + " (ScryfallID, Name, OracleID, OracleText, ManaCost, SetName, SetCode) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    + "SetCode varchar(5),LowerCaseName varchar(150), PRIMARY KEY (ScryfallID))";
+            String sqlInsert = "INSERT INTO " + newTableName + " (ScryfallID, Name, OracleID, OracleText, ManaCost, SetName, SetCode,LowerCaseName) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             statement.executeUpdate(sqlCreate);
             PreparedStatement preparedStatement = dbManager.getConnection().prepareStatement(sqlInsert);
@@ -68,8 +69,8 @@ public class DerbyCardDatabase extends CardDatabase {
 
                 if (!"token".equals(layout) && !"emblem".equals(layout) && !"art_series".equals(layout) && !"double_faced_token".equals(layout)) {
                     String name = jsonCard.getString("name");
-                    String key = name.toLowerCase();
-                    currentCard.setCardName(name);
+                    String lower_case_name = name.toLowerCase();
+                    currentCard.setCardName(lower_case_name);
                     currentCard.setOracleID(jsonCard.getString("oracle_id"));
                     currentCard.setScryfallID(jsonCard.getString("id"));
                     currentCard.setOracleText(jsonCard.optString("oracle_text"));
@@ -85,6 +86,7 @@ public class DerbyCardDatabase extends CardDatabase {
                     preparedStatement.setString(5, currentCard.getManaCost());
                     preparedStatement.setString(6, currentCard.getSetName());
                     preparedStatement.setString(7, currentCard.getSetCode());
+                    preparedStatement.setString(8, lower_case_name);
 
                     // Execute the insert
                     preparedStatement.executeUpdate();
@@ -114,21 +116,38 @@ public class DerbyCardDatabase extends CardDatabase {
 
     @Override
     public OracleCard findCardByName(String name) {
-        return null;
-    }
+        OracleCard returnCard = null;
+        try {
+            String lower_case_name = reformatName(name);
 
-    private void insertCard(Statement statement, OracleCard card, String tableName) throws SQLException {
-
-        String sqlInsert = "INSERT INTO " + tableName + " VALUES('"
-                + card.getScryfallID() + "','"
-                + card.getCardName() + "','"
-                + card.getOracleID() + "','"
-                + card.getOracleText() + "','"
-                + card.getManaCost() + "','"
-                + card.getSetName() + "','"
-                + card.getSetCode() + "')";
-        statement.executeUpdate(sqlInsert);
-
+            String sql = "SELECT * FROM ORACLECARDS WHERE LowerCaseName = ? FETCH FIRST 1 ROW ONLY";
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, lower_case_name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                
+                String id = resultSet.getString("ScryfallID");
+                String resultName = resultSet.getString("Name");
+                String oracleID = resultSet.getString("OracleID");
+                String oracleText = resultSet.getString("OracleText");
+                String manaCost = resultSet.getString("ManaCost");
+                String setName = resultSet.getString("SetName");
+                String SetCode = resultSet.getString("SetCode");
+                returnCard = new OracleCard();
+                returnCard.setCardName(resultName);
+                returnCard.setOracleID(oracleID);
+                returnCard.setOracleText(oracleText);
+                returnCard.setManaCost(manaCost);
+                returnCard.setSetName(setName);
+                returnCard.setSetCode(SetCode);
+            } else {
+                System.out.println("No matching rows found.");
+            }
+            return returnCard;
+        } catch (SQLException ex) {
+            Logger.getLogger(DerbyCardDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return returnCard;
     }
 
     private static String reformatName(String name) { // this method reformats the name string because some files use different formats for certain card names.
