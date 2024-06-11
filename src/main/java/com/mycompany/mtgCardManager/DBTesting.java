@@ -4,7 +4,12 @@
  */
 package com.mycompany.mtgCardManager;
 
-import database.MySQLDatabase;
+import database.DerbyCardDatabase;
+import database.DerbyDatabase;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,13 +20,34 @@ public class DBTesting {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        MySQLDatabase dbManager = new MySQLDatabase();
+    public static void main(String[] args) throws SQLException {
+        //DerbyDatabase dbManager = new DerbyDatabase();
+        DerbyCardDatabase cardDB = new DerbyCardDatabase();
+        //cardDB.updateDatabase("src/files/oracle-cards-20240412210228.json");
+        DerbyDatabase dbManager = cardDB.get_DBManager();
+        ResultSet rs = dbManager.myQuery("Select * from ORACLECARDS");
         //If it's an online database: You will find: org.apache.derby.client.net.NetConnection40@7fbe847c
         //That means: Connection conn = new NetConnection(); 
         //If it's an embedded database: You will find: org.apache.derby.impl.jdbc.EmbedConnection40@681384962 (XID = 16), (SESSIONID = 1), (DATABASE = CarDB), (DRDAID = null) 
         //That means: Connection conn = new EmbedConnection40(); 
-        System.out.println(dbManager.getConnection());
+        cardDB.getConnection().commit();
+        DatabaseMetaData dbmd = cardDB.getConnection().getMetaData();
+        System.out.println("Database product name : " + dbmd.getDatabaseProductName());
+        System.out.println("Database version : " + dbmd.getDatabaseProductVersion());
+        System.out.println("URL: " + dbmd.getURL());
+        System.out.println("driver name: " + dbmd.getDriverName());
+        System.out.println("driver version: " + dbmd.getDriverVersion());
+        ResultSetMetaData rsmd = rs.getMetaData();
+                    int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+        System.out.println("rs n:" + rowCount);
+        System.out.println("Number of Columns:" + rsmd.getColumnCount());
+        System.out.println("Table Name (column 2):" + rsmd.getTableName(2));
+        System.out.println("Data Type (column 2):" + rsmd.getColumnType(2));
+
+        System.out.println(cardDB.getConnection().getSchema());
     }
-    
+
 }

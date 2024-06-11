@@ -4,7 +4,7 @@
  */
 package cui.functions;
 
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import fileio.TextFileCardReader;
 import models.Card;
 import models.OracleCard;
@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 public class DeckCreator extends Creator {
 
     protected Deck createdDeck;
-    protected JSONCardDatabase database;
+    protected InMemoryCardDatabase database;
     protected boolean inSideboard = false;
 
     public boolean isInSideboard() {
@@ -29,20 +29,20 @@ public class DeckCreator extends Creator {
         this.inSideboard = inSideboard;
     }
 
-    public DeckCreator(String DeckName, JSONCardDatabase database) {
+    public DeckCreator(String DeckName, InMemoryCardDatabase database) {
         Deck newDeck = new Deck(DeckName);
         newDeck.setUpdated(true);
         this.createdDeck = newDeck;
         this.database = database;
     }
-    public DeckCreator(Deck deck,JSONCardDatabase database){
+    public DeckCreator(Deck deck,InMemoryCardDatabase database){
     this.createdDeck = deck;
         this.database = database;
         deck.updateDeckOracleInfo(database);
         deck.setUpdated(true);
     }
 
-    public DeckCreator(TextFileCardReader reader, JSONCardDatabase database) {
+    public DeckCreator(TextFileCardReader reader, InMemoryCardDatabase database) {
         try{
         this.createdDeck = reader.readDeckFromFile();
         }
@@ -57,11 +57,11 @@ public class DeckCreator extends Creator {
         this.createdDeck = createdDeck;
     }
 
-    public JSONCardDatabase getDatabase() {
+    public InMemoryCardDatabase getDatabase() {
         return database;
     }
 
-    public void setDatabase(JSONCardDatabase database) {
+    public void setDatabase(InMemoryCardDatabase database) {
         this.database = database;
     }
 

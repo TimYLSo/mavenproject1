@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package com.mycompany.mtgCardManager;
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import fileio.TextFileCardReader;
 import models.CollectionList;
 import models.Deck;
@@ -20,7 +20,7 @@ public class CardReaderTesting {
     public static void main(String[] args) {
         String path = "src/files/oracle-cards-20240412210228.json";
 //         path = "src/files/minidatabase.json";
-        JSONCardDatabase db = new JSONCardDatabase(path);
+        InMemoryCardDatabase db = new InMemoryCardDatabase(path);
         String file = "C:\\Users\\User\\Documents\\school\\2024\\pdc\\assignment\\decks\\DomainZoo.txt";
         String secondFile = "src/files/collection.txt";
 //        Deck deck = TextFileCardReader.readFile("src/files/DargoThras.txt");

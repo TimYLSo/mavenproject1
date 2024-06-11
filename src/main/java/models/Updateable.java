@@ -4,12 +4,12 @@
  */
 package models;
 
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 
 /**
  *
  * @author User
  */
 public interface Updateable {
-     public void updateDeckOracleInfo(JSONCardDatabase database);
+     public void updateDeckOracleInfo(InMemoryCardDatabase database);
 }

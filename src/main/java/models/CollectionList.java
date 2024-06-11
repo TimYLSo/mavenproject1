@@ -4,7 +4,7 @@
  */
 package models;
 
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -60,7 +60,7 @@ public class CollectionList implements Updateable {
         }
     }
     @Override
-    public void updateDeckOracleInfo (JSONCardDatabase database)throws NoSuchElementException{
+    public void updateDeckOracleInfo (InMemoryCardDatabase database)throws NoSuchElementException{
         try{
             Iterator<Card> listIterator = this.getCardList().iterator();
             while(listIterator.hasNext())

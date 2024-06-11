@@ -4,7 +4,7 @@
  */
 package com.mycompany.mtgCardManager;
 
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import models.Card;
 import models.OracleCard;
 import java.util.NoSuchElementException;
@@ -22,7 +22,7 @@ public class Databasetesting {
         // TODO code application logic here
         String path = "src/files/oracle-cards-20240412210228.json";
 //         path = "src/files/minidatabase.json";
-        JSONCardDatabase db = new JSONCardDatabase(path);
+        InMemoryCardDatabase db = new InMemoryCardDatabase(path);
         OracleCard card =db.findCardByName("Territorial Kavu");
         Card deckCard = new Card("Forcge of Will");
         System.out.print(deckCard);

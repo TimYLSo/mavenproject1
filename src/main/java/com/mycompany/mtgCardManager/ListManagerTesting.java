@@ -4,7 +4,7 @@
  */
 package com.mycompany.mtgCardManager;
 
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import models.Card;
 import models.CollectionList;
 import groupmanager.CollectionsManager;
@@ -23,7 +23,7 @@ public static void main(String[] args) {
         String path = "src/files/CollectionLists/listLocations.txt";
         String path2 = "src/files/oracle-cards-20240412210228.json";
 //         path = "src/files/minidatabase.json";
-        JSONCardDatabase db = new JSONCardDatabase(path2);
+        InMemoryCardDatabase db = new InMemoryCardDatabase(path2);
         CollectionsManager manager = new CollectionsManager(path, db);
         ArrayList<CollectionList> decks = manager.getAllLists();
 //        System.out.println(manager.isInManager("DargoThrasios"));

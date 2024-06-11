@@ -4,7 +4,7 @@
  */
 package com.mycompany.mtgCardManager;
 
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import fileio.CSVCardReader;
 import fileio.ListWriter;
 import fileio.TextFileCardReader;
@@ -25,7 +25,7 @@ public class csvCardReaderTesting {
     public static void main(String[] args) {
                 String path = "src/files/oracle-cards-20240412210228.json";
 //         path = "src/files/minidatabase.json";
-        JSONCardDatabase db = new JSONCardDatabase(path);
+        InMemoryCardDatabase db = new InMemoryCardDatabase(path);
         String file = "C:\\Users\\User\\Documents\\school\\2024\\pdc\\assignment\\decks\\DomainZoo.txt";
         String secondFile = "src/files/collection2.csv";
 //        Deck deck = TextFileCardReader.readFile("src/files/DargoThras.txt");

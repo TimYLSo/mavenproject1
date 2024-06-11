@@ -4,7 +4,7 @@
  */
 package models;
 import java.util.Set;
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import java.util.NoSuchElementException;
 /**
  *
@@ -99,7 +99,7 @@ public class OracleCard {
     return returnString;
        
 }
-    public void updateCardInfo(JSONCardDatabase database){
+    public void updateCardInfo(InMemoryCardDatabase database){
     try{ 
         OracleCard cardinfo = database.findCardByName(this.getCardName());
         if(cardinfo == null){throw new NoSuchElementException ();}

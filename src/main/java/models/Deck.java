@@ -4,7 +4,7 @@
  */
 package models;
 
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -92,7 +92,7 @@ public class Deck implements Modifyable, Updateable {
     }
 
     @Override
-    public void updateDeckOracleInfo(JSONCardDatabase database) throws NoSuchElementException {
+    public void updateDeckOracleInfo(InMemoryCardDatabase database) throws NoSuchElementException {
         try {
             Set maindeckset = this.getDeckContents().keySet();
             Iterator<Card> maindeckIterator = maindeckset.iterator();
