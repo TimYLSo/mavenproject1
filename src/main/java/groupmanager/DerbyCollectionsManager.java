@@ -49,7 +49,7 @@ public class DerbyCollectionsManager {
             if (!(dbManager.tableExists(tableName, statement))) {
                 String sqlCreate = "create table " + tableName + " (ListID varchar(50) not null,"
                         + "ListName varchar(70),"
-                        + "PRIMARY KEY (DeckID))";
+                        + "PRIMARY KEY (ListID))";
                 statement.executeUpdate(sqlCreate);
 
             }

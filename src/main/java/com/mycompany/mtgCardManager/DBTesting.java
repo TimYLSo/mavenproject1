@@ -27,7 +27,7 @@ public class DBTesting {
         //DerbyDatabase dbManager = new DerbyDatabase();
         DerbyDatabase dbManager = new DerbyDatabase();
         DerbyCardDatabase cardDB = new DerbyCardDatabase(dbManager);
-        //cardDB.updateDatabase("src/files/oracle-cards-20240412210228.json");
+        cardDB.updateDatabase("src/files/default-cards-20240613090617.json");
         ResultSet rs = dbManager.myQuery("Select * from ORACLECARDS");
         //If it's an online database: You will find: org.apache.derby.client.net.NetConnection40@7fbe847c
         //That means: Connection conn = new NetConnection(); 
