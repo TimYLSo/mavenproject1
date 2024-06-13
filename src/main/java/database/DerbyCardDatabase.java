@@ -31,8 +31,9 @@ public class DerbyCardDatabase extends CardDatabase {
     public DerbyCardDatabase() {
         dbManager = new DerbyDatabase();
     }
-    public DerbyCardDatabase(DerbyDatabase database){
-     dbManager = database;
+
+    public DerbyCardDatabase(DerbyDatabase database) {
+        dbManager = database;
     }
 
     public Connection getConnection() {
@@ -53,18 +54,20 @@ public class DerbyCardDatabase extends CardDatabase {
             JSONArray jsonCardList = new JSONArray(jsonTokener);
             String newTableName = "ORACLECARDS";
             Statement statement = getConnection().createStatement();
-            if (dbManager.tableExists(newTableName, statement)) {
-                String sqlDrop = "DROP TABLE " + newTableName;
-                statement.executeUpdate(sqlDrop);
-            }
+            if (!(dbManager.tableExists(newTableName, statement))) {
             String sqlCreate = "create table " + newTableName + " (ScryfallID varchar(50) not null,"
                     + "Name varchar(150), OracleID varchar(50),"
                     + "OracleText varchar(2000), ManaCost varchar(50),SetName varchar(100),"
-                    + "SetCode varchar(5),LowerCaseName varchar(150), PRIMARY KEY (ScryfallID))";
-            String sqlInsert = "INSERT INTO " + newTableName + " (ScryfallID, Name, OracleID, OracleText, ManaCost, SetName, SetCode,LowerCaseName) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
+                    + "SetCode varchar(20),LowerCaseName varchar(150), PRIMARY KEY (ScryfallID))";
             statement.executeUpdate(sqlCreate);
-            PreparedStatement preparedStatement = dbManager.getConnection().prepareStatement(sqlInsert);
+            }
+
+            String sqlInsert = "INSERT INTO " + newTableName + " (ScryfallID, Name, OracleID, OracleText, ManaCost, SetName, SetCode,LowerCaseName) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sqlUpdate = "UPDATE " + newTableName + " SET Name = ?, OracleID = ?, OracleText = ?, ManaCost = ?, SetName = ?, SetCode = ?, LowerCaseName = ? WHERE ScryfallID = ?";;
+
+            
+            PreparedStatement insertStatement = dbManager.getConnection().prepareStatement(sqlInsert);
+            PreparedStatement updateStatement = dbManager.getConnection().prepareStatement(sqlUpdate);
             for (int i = 0; i < jsonCardList.length(); i++) {
                 JSONObject jsonCard = jsonCardList.getJSONObject(i);
                 OracleCard currentCard = new OracleCard();
@@ -74,25 +77,43 @@ public class DerbyCardDatabase extends CardDatabase {
                     String name = jsonCard.getString("name");
                     String lower_case_name = name.toLowerCase();
                     currentCard.setCardName(lower_case_name);
-                    currentCard.setOracleID(jsonCard.getString("oracle_id"));
+                    if ("reversible_card".equals(layout)){
+                     JSONObject face=   jsonCard.getJSONArray("card_faces").getJSONObject(0);
+                    currentCard.setOracleID(face.getString("oracle_id"));
+                    
+                    }
+                    else{currentCard.setOracleID(jsonCard.getString("oracle_id"));}
+                    
                     currentCard.setScryfallID(jsonCard.getString("id"));
                     currentCard.setOracleText(jsonCard.optString("oracle_text"));
                     currentCard.setManaCost(jsonCard.optString("mana_cost"));
                     currentCard.setSetName(jsonCard.getString("set_name"));
                     currentCard.setSetCode(jsonCard.getString("set"));
+                    if (idInDatabase(currentCard.getScryfallID())) {
+                        updateStatement.setString(1, currentCard.getScryfallID());
+                        updateStatement.setString(2, currentCard.getCardName());
+                        updateStatement.setString(3, currentCard.getOracleID());
+                        updateStatement.setString(4, currentCard.getOracleText());
+                        updateStatement.setString(5, currentCard.getManaCost());
+                        updateStatement.setString(6, currentCard.getSetName());
+                        updateStatement.setString(7, currentCard.getSetCode());
+                        updateStatement.setString(8, lower_case_name);
+                        updateStatement.executeUpdate();
 
-                    // Set the values for the prepared statement
-                    preparedStatement.setString(1, currentCard.getScryfallID());
-                    preparedStatement.setString(2, currentCard.getCardName());
-                    preparedStatement.setString(3, currentCard.getOracleID());
-                    preparedStatement.setString(4, currentCard.getOracleText());
-                    preparedStatement.setString(5, currentCard.getManaCost());
-                    preparedStatement.setString(6, currentCard.getSetName());
-                    preparedStatement.setString(7, currentCard.getSetCode());
-                    preparedStatement.setString(8, lower_case_name);
+                    } // Set the values for the prepared statement
+                    else {
+                        insertStatement.setString(1, currentCard.getScryfallID());
+                        insertStatement.setString(2, currentCard.getCardName());
+                        insertStatement.setString(3, currentCard.getOracleID());
+                        insertStatement.setString(4, currentCard.getOracleText());
+                        insertStatement.setString(5, currentCard.getManaCost());
+                        insertStatement.setString(6, currentCard.getSetName());
+                        insertStatement.setString(7, currentCard.getSetCode());
+                        insertStatement.setString(8, lower_case_name);
+                        insertStatement.executeUpdate();
+                    }
 
                     // Execute the insert
-                    preparedStatement.executeUpdate();
                 }
             }
 
@@ -106,8 +127,6 @@ public class DerbyCardDatabase extends CardDatabase {
 
     }
 
-
-
     @Override
     public OracleCard findCardByName(String name) {
         OracleCard returnCard = null;
@@ -119,7 +138,7 @@ public class DerbyCardDatabase extends CardDatabase {
             preparedStatement.setString(1, lower_case_name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                
+
                 String id = resultSet.getString("ScryfallID");
                 String resultName = resultSet.getString("Name");
                 String oracleID = resultSet.getString("OracleID");
@@ -137,14 +156,13 @@ public class DerbyCardDatabase extends CardDatabase {
                 returnCard.setSetCode(SetCode);
             } else {
                 System.out.println("No matching rows found.");
-                 throw new NoSuchElementException("There is no such card in the database: " + name);
+                throw new NoSuchElementException("There is no such card in the database: " + name);
             }
             return returnCard;
         } catch (SQLException ex) {
             Logger.getLogger(DerbyCardDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch(NoSuchElementException ex){
-         throw new NoSuchElementException("There is no such card in the database: " + name);
+        } catch (NoSuchElementException ex) {
+            throw new NoSuchElementException("There is no such card in the database: " + name);
         }
         return returnCard;
     }
@@ -157,9 +175,23 @@ public class DerbyCardDatabase extends CardDatabase {
         return newName;
     }
 
+    public boolean idInDatabase(String id) throws SQLException {
+        try {
+            String sql = "SELECT * FROM ORACLECARDS WHERE ScryfallID = ? FETCH FIRST 1 ROW ONLY";
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(DerbyCardDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        
+    }
+
     @Override
     public OracleCard findCardByOracleID(String id) {
-                OracleCard returnCard = null;
+        OracleCard returnCard = null;
         try {
 
             String sql = "SELECT * FROM ORACLECARDS WHERE ScryfallID = ? FETCH FIRST 1 ROW ONLY";
@@ -167,7 +199,7 @@ public class DerbyCardDatabase extends CardDatabase {
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                
+
                 String resultName = resultSet.getString("Name");
                 String oracleID = resultSet.getString("OracleID");
                 String oracleText = resultSet.getString("OracleText");
@@ -184,14 +216,14 @@ public class DerbyCardDatabase extends CardDatabase {
                 returnCard.setSetCode(SetCode);
             } else {
                 System.out.println("No matching rows found.");
-                 throw new NoSuchElementException("There is no such card in the database: " + id);
+                throw new NoSuchElementException("There is no such card in the database: " + id);
             }
             return returnCard;
         } catch (SQLException ex) {
             Logger.getLogger(DerbyCardDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchElementException ex) {
+            throw new NoSuchElementException("There is no such card in the database: " + id);
         }
-        catch(NoSuchElementException ex){
-         throw new NoSuchElementException("There is no such card in the database: " + id);
-        }
-        return returnCard;}
+        return returnCard;
+    }
 }
