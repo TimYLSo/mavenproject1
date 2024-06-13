@@ -4,6 +4,7 @@
  */
 package database;
 
+import java.util.NoSuchElementException;
 import models.OracleCard;
 
 /**
@@ -11,6 +12,6 @@ import models.OracleCard;
  * @author User
  */
 public interface DatabaseSearch {
-    public OracleCard findCardByOracleID(String id);
-    public OracleCard findCardByName(String name);
+    public OracleCard findCardByOracleID(String id)throws NoSuchElementException;
+    public OracleCard findCardByName(String name)throws NoSuchElementException;
 }

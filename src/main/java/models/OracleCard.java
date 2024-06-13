@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package models;
+import database.DerbyCardDatabase;
 import java.util.Set;
-import database.InMemoryCardDatabase;
 import java.util.NoSuchElementException;
 /**
  *
@@ -99,7 +99,7 @@ public class OracleCard {
     return returnString;
        
 }
-    public void updateCardInfo(InMemoryCardDatabase database){
+    public void updateCardInfo(DerbyCardDatabase database){
     try{ 
         OracleCard cardinfo = database.findCardByName(this.getCardName());
         if(cardinfo == null){throw new NoSuchElementException ();}

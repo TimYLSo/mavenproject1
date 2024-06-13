@@ -4,6 +4,7 @@
  */
 package groupmanager;
 
+import database.DerbyCardDatabase;
 import database.InMemoryCardDatabase;
 import fileio.CSVCardReader;
 import fileio.ListWriter;
@@ -30,7 +31,7 @@ import java.util.logging.Logger;
 public class CollectionsManager extends Manager {
 
     ArrayList<CollectionList> collection = new ArrayList();
-    InMemoryCardDatabase database;
+    DerbyCardDatabase database;
     HashMap<String, String> collectionPaths = new HashMap<>();
 
     public CollectionsManager(String pathToFile) {
@@ -41,7 +42,7 @@ public class CollectionsManager extends Manager {
         return this.collectionPaths;
     }
 
-    private void updateLists(InMemoryCardDatabase database) {
+    private void updateLists(DerbyCardDatabase database) {
         for (int i = 0; i < this.collection.size(); i++) {
             CollectionList collectionList = this.collection.get(i);
             try{
@@ -96,7 +97,7 @@ public class CollectionsManager extends Manager {
         return this.collection;
     }
 
-    public CollectionsManager(String pathToFile, InMemoryCardDatabase database) {
+    public CollectionsManager(String pathToFile, DerbyCardDatabase database) {
         super(pathToFile);
         this.currentSavePath = "src/files/CollectionLists/";
         this.database = database;
