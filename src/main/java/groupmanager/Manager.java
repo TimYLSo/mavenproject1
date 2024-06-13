@@ -22,4 +22,5 @@ abstract class Manager {
     public Manager(String pathToFile){
     this.pathToFile = pathToFile;
     }
+    
 }

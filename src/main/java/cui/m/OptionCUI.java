@@ -6,7 +6,7 @@ package cui.m;
 
 import com.mycompany.mtgCardManager.MtgCardManager;
 import cui.functions.InputGetter;
-import database.JSONCardDatabase;
+import database.InMemoryCardDatabase;
 import models.Deck;
 import groupmanager.CollectionsManager;
 import groupmanager.DecksManager;
@@ -134,7 +134,7 @@ public class OptionCUI {
     }
 
     public static void SearchCards() {
-        JSONCardDatabase db = MtgCardManager.database;
+        InMemoryCardDatabase db = MtgCardManager.database;
 
     }
 

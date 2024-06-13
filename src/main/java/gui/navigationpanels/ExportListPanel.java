@@ -5,6 +5,7 @@
 package gui.navigationpanels;
 
 import gui.basePanels.AppPanel;
+import gui.basePanels.ExportPanel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author User
  */
-public class ExportListPanel extends AppPanel {
+public class ExportListPanel extends ExportPanel {
     public ExportListPanel(){
         JPanel main = this.getMainPanel();
     main.add(new JLabel("Please select the list to export"));

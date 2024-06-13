@@ -5,11 +5,12 @@
 package gui.navigationpanels;
 
 import gui.basePanels.AppPanel;
+import gui.basePanels.ExportPanel;
 
 /**
  *
  * @author User
  */
-public class ExportDecksPanel extends AppPanel {
+public class ExportDecksPanel extends ExportPanel {
     
 }

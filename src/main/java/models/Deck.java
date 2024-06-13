@@ -4,25 +4,33 @@
  */
 package models;
 
-import database.JSONCardDatabase;
+import database.DerbyCardDatabase;
+import database.InMemoryCardDatabase;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  *
  * @author User
  */
-public class Deck implements Modifyable, Updateable {
+public class Deck implements Modifyable {
 
-    protected HashMap deckContents = new HashMap<Card, Integer>(100);
-    protected HashMap sideboard = new HashMap<Card, Integer>(15);
+    protected HashMap deckContents = new HashMap<OracleCard, Integer>(100);
+    protected HashMap sideboard = new HashMap<OracleCard, Integer>(15);
+    protected ArrayList<DeckCard> deck = new ArrayList<>();
     protected boolean updated = false;
     protected String DeckName = "new Deck";
+    protected UUID id;
 
     public String getDeckName() {
         return DeckName;
+    }
+    public String getUUID(){
+    return this.id.toString();
     }
 
     public void setDeckName(String DeckName) {
@@ -31,10 +39,15 @@ public class Deck implements Modifyable, Updateable {
 
     public Deck(String deckName) {
         this.DeckName = deckName;
+        id = UUID.randomUUID();
     }
-
+    public Deck (String deckName,String id){
+    this.DeckName = deckName;
+    this.id = UUID.fromString(id);
+    }
     public Deck() {
         this.DeckName = "Unamed Deck";
+        id = UUID.randomUUID();
     }
 
     public boolean isUpdated() {
@@ -62,7 +75,7 @@ public class Deck implements Modifyable, Updateable {
     }
 
     @Override
-    public void addCard(Card card, int quantity, boolean isSideboard) {
+    public void addCard(OracleCard card, int quantity, boolean isSideboard) {
         if (isSideboard) {
             try {
 
@@ -91,14 +104,14 @@ public class Deck implements Modifyable, Updateable {
 
     }
 
-    @Override
-    public void updateDeckOracleInfo(JSONCardDatabase database) throws NoSuchElementException {
+    
+    public void updateDeckOracleInfo(DerbyCardDatabase database) throws NoSuchElementException {
         try {
             Set maindeckset = this.getDeckContents().keySet();
-            Iterator<Card> maindeckIterator = maindeckset.iterator();
+            Iterator<OracleCard> maindeckIterator = maindeckset.iterator();
 
             while (maindeckIterator.hasNext()) {
-                Card card = maindeckIterator.next();
+                OracleCard card = maindeckIterator.next();
 
                 if (!card.isHasBeenUpdated()) {
 
@@ -107,10 +120,10 @@ public class Deck implements Modifyable, Updateable {
                 }
             }
             Set sideboardset = this.getSideboard().keySet();
-            Iterator<Card> sideboardIterator = sideboardset.iterator();
+            Iterator<OracleCard> sideboardIterator = sideboardset.iterator();
 
             while (sideboardIterator.hasNext()) {
-                Card card = sideboardIterator.next();
+                OracleCard card = sideboardIterator.next();
                 if (!card.isHasBeenUpdated()) {
 
                     card.updateCardInfo(database);
@@ -129,7 +142,7 @@ public class Deck implements Modifyable, Updateable {
     @Override
     public void removeCardByName(String cardName, int quantity, boolean isSideboard) {
         Set iteratorset;
-        HashMap<Card, Integer> deckMap;
+        HashMap<OracleCard, Integer> deckMap;
 
         try {
             if (isSideboard) {
@@ -140,9 +153,9 @@ public class Deck implements Modifyable, Updateable {
                 deckMap = this.getDeckContents();
             }
 
-            Iterator<Card> setIterator = iteratorset.iterator();
+            Iterator<OracleCard> setIterator = iteratorset.iterator();
             while (setIterator.hasNext() && quantity != 0) {
-                Card card = setIterator.next();
+                OracleCard card = setIterator.next();
                 String currentCardName = card.getCardName();
                 if (cardName.equals(currentCardName)) {
                     if (deckMap.get(card) < quantity) {
@@ -154,11 +167,11 @@ public class Deck implements Modifyable, Updateable {
                         quantity = 0;
                     }
                 }
+
+            }
                 if (quantity != 0) {
                     throw new NoSuchElementException();
                 }
-            }
-
         } catch (NoSuchElementException ex) {
             System.out.println("The Card of that quantity can not be found in the deck.\n The maximum amount has been removed." + ex);
         } catch (Exception e) {

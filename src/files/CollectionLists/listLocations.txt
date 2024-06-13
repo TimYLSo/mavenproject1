@@ -1,3 +1,0 @@
-ss,src/files/CollectionLists/ss.csv
-new list,src/files/CollectionLists/new list.csv
-List1,src\files\CollectionLists\collection.csv

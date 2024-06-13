@@ -9,6 +9,6 @@ package models;
  * @author User
  */
 public interface Modifyable {
-    public void addCard(Card card, int quantity, boolean isSideboard);
+    public void addCard(OracleCard card, int quantity, boolean isSideboard);
     public void removeCardByName(String cardID,int quantity, boolean isSideboard);
 }

@@ -4,7 +4,8 @@
  */
 package groupmanager;
 
-import database.JSONCardDatabase;
+import database.DerbyCardDatabase;
+import database.InMemoryCardDatabase;
 import fileio.DeckWriter;
 import fileio.TextFileCardReader;
 import models.Card;
@@ -30,14 +31,14 @@ import java.util.logging.Logger;
 public class DecksManager extends Manager {
 
     ArrayList<Deck> listOfDecks = new ArrayList();
-    JSONCardDatabase database;
+    DerbyCardDatabase database;
     HashMap<String, String> deckPaths = new HashMap<>();
 
     public HashMap<String, String> getDeckPaths() {
         return this.deckPaths;
     }
 
-    private void updateDecks(JSONCardDatabase database) {
+    private void updateDecks(DerbyCardDatabase database) {
         for (int i = 0; i < this.listOfDecks.size(); i++) {
             Deck deck = this.listOfDecks.get(i);
             if (!deck.isUpdated()) {
@@ -87,7 +88,7 @@ public class DecksManager extends Manager {
         return this.listOfDecks;
     }
 
-    public DecksManager(String pathToFile, JSONCardDatabase database) {
+    public DecksManager(String pathToFile, DerbyCardDatabase database) {
         super(pathToFile);
         this.currentSavePath = "src/files/Decks/";
         this.database = database;

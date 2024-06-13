@@ -13,8 +13,23 @@ public class Card extends OracleCard {
     protected String language = "english";
     protected boolean foil = false;
     protected String condition = "nm";
-    public Card(String name){
+
+    public Card(String name) {
         super.setCardName(name);
+    }
+
+    public Card(OracleCard parent) {
+        this.CardName = parent.CardName;
+        this.ManaCost = parent.ManaCost;
+        this.OracleID = parent.OracleID;
+        this.ScryfallID = parent.ScryfallID;
+        this.OracleText = parent.OracleText;
+        this.ManaCost = parent.ManaCost;
+        this.ManaValue = parent.ManaValue;
+        this.CardName = parent.CardName;
+        this.SetName = parent.SetName;
+        this.SetCode = parent.SetCode;
+
     }
 
     public String getLanguage() {
@@ -40,6 +55,5 @@ public class Card extends OracleCard {
     public void setCondition(String condition) {
         this.condition = condition;
     }
-    
-   
+
 }
