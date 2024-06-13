@@ -25,10 +25,8 @@ JPanel topPanel = new JPanel();
     public AppPanel() {
            setLayout(new BorderLayout(0,30));
            setBorder(new EmptyBorder(0, 0, 30, 30));
-           JLabel title = new JLabel(titleMessage);
         topPanel.setLayout(new BorderLayout());
         topPanel.add(returnButton, BorderLayout.WEST);
-        topPanel.add(title,BorderLayout.SOUTH);
          mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         

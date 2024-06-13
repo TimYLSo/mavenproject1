@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         setTitle("Main");
-        setSize(700, 700);
+        setSize(700, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel optionsPanel = new MainMenu();
