@@ -8,6 +8,7 @@ import com.mycompany.mtgCardManager.MtgCardManager;
 import groupmanager.DecksManager;
 import groupmanager.DerbyDecksManager;
 import gui.basePanels.AppPanel;
+import gui.components.ShowDeckButton;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -53,7 +54,7 @@ public class ViewAllDecksPanel extends AppPanel {
                 int newHeight = 20;
                 Dimension newSize = new Dimension(currentSize.width, newHeight);
                 buttonPanel.setPreferredSize(newSize);
-                buttonPanel.add(new JButton(deckName));
+                buttonPanel.add(new ShowDeckButton(id,manager,this));
                 buttonPanel.add(new JButton("delete"));
                 decksPanel.add(buttonPanel);
 

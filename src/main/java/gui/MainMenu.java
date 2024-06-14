@@ -4,7 +4,7 @@
  */
 package gui;
 
-import gui.buttons.LinkButton;
+import gui.components.LinkButton;
 import gui.navigationpanels.*;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

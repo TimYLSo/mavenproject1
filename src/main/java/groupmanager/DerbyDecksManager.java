@@ -94,7 +94,7 @@ public class DerbyDecksManager {
         return decks;
     }
 
-    private String getNameFromID(String deckID) throws SQLException, NoSuchElementException {
+    public String getNameFromID(String deckID) throws SQLException, NoSuchElementException {
         try {
             String sql = "SELECT * FROM DECKS WHERE DeckID = ? FETCH FIRST 1 ROW ONLY";
             PreparedStatement preparedStatement = getConnection().prepareStatement(sql);

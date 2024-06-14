@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package gui.buttons;
+package gui.components;
 
 import gui.MainFrame;
 import java.awt.Color;
@@ -17,20 +17,11 @@ import javax.swing.JPanel;
  *
  * @author User
  */
-public class LinkButton extends JButton {
+public class LinkButton extends PanelButton {
 
     private Class<? extends JPanel> panelClass;
 
-    public MainFrame getFrameParent() {
-        Container parent = this.getParent();
-        while (parent != null && !(parent instanceof MainFrame)) {
-            parent = parent.getParent();
-        }
-        if (parent instanceof MainFrame) {
-            return (MainFrame) parent;
-        }
-        return null;
-    }
+
 
     public LinkButton(String buttonText, Class<? extends JPanel> panelClass) {
         super(buttonText);

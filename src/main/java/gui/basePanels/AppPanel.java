@@ -4,7 +4,7 @@
  */
 package gui.basePanels;
 
-import gui.buttons.LinkButton;
+import gui.components.LinkButton;
 import gui.MainMenu;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
