@@ -4,7 +4,7 @@
  */
 package gui;
 
-import gui.buttons.LinkButton;
+import gui.components.LinkButton;
 import gui.navigationpanels.*;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends JPanel {
 
-    LinkButton ViewDecksButton = new LinkButton("View Decks",ViewDecksPanel.class);
+    LinkButton ViewDecksButton = new LinkButton("View Decks",ViewAllDecksPanel.class);
     JButton ExportDecksButton = new LinkButton("Export Decks",ExportDecksPanel.class);
     JButton ImportDecksButton = new LinkButton("Import Decks",UploadDecksPanel.class);
     JButton CreateDeckButton = new LinkButton("Create Deck",CreateDeckPanel.class);
