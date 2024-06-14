@@ -51,7 +51,7 @@ public class CSVCardReader extends CardReader implements ReadsFileToList {
             throw new IOException();
         } catch (IOException | NullPointerException|IllegalArgumentException e) {
             System.out.println("There is a problem with the formatting of the CSV file.Please update the database and try again.\n" + e);
-            throw new IOException();
+            throw new IOException("There is a problem with the formatting of the CSV file.Please update the database and try again.\n");
         }
 
         return outputList;

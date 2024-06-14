@@ -81,7 +81,17 @@ public class viewDeckPanel extends AppPanel {
             deckViewer.add(cardLabel);
 
         }
+                Set sideset = sideboard.keySet();
+        Iterator<OracleCard> sideIterator = sideset.iterator();
         deckViewer.add(new JLabel("Sideboard:"));
+                while (sideIterator.hasNext()) {
+            OracleCard card = sideIterator.next();
+            Integer quantity = sideboard.get(card);
+            String id = card.getScryfallID();
+            CardLabel cardLabel = new CardLabel(MtgCardManager.database, id, quantity, this);
+            deckViewer.add(cardLabel);
+
+        }
     }
 
     public void updateCardViewer(OracleCard card) {

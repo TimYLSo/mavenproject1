@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.OracleCard;
 
 /**
  *
@@ -35,6 +36,7 @@ public class DeckWriter extends CardWriter {
     public void setWholePath(String wholePath) {
         this.wholePath = wholePath;
     }
+
     public DeckWriter(String filePath, Deck deck) {
         super(filePath, deck);
         this.deckToWrite = deck;
@@ -43,28 +45,30 @@ public class DeckWriter extends CardWriter {
     public void addDeck(Deck deck) {
         this.deckToWrite = deck;
     }
-public void writeFileAsTextFile(String filename,boolean a) throws FileNotFoundException{
-String fullPath = this.getFilePath() + filename + ".txt";
-this.setWholePath(fullPath);
-writeFileAsTextFile(fullPath);
-}
+
+    public void writeFileAsTextFile(String filename, boolean a) throws FileNotFoundException {
+        String fullPath = this.getFilePath() + filename + ".txt";
+        this.setWholePath(fullPath);
+        writeFileAsTextFile(fullPath);
+    }
+
     public void writeFileAsTextFile(String fullpath) throws FileNotFoundException { // creates a file in the designated path with the designated fullpath, if fullpath already exists, overwrites it.
 
         PrintWriter pw = null;
-        
+
         try {
             String fullPath = fullpath;
             File textFile = new File(fullPath);
             textFile.createNewFile();
             pw = new PrintWriter(fullPath);
             Deck deck = this.deckToWrite;
-            
-            Set maindeckset = deck.getDeckContents().keySet();
-            HashMap<Card, Integer> mainDeck = deck.getDeckContents();
 
-            Iterator<Card> maindeckIterator = maindeckset.iterator();
+            Set maindeckset = deck.getDeckContents().keySet();
+            HashMap<OracleCard, Integer> mainDeck = deck.getDeckContents();
+
+            Iterator<OracleCard> maindeckIterator = maindeckset.iterator();
             while (maindeckIterator.hasNext()) {
-                Card card = maindeckIterator.next();
+                OracleCard card = maindeckIterator.next();
                 Integer quantity = mainDeck.get(card);
                 String cardAsString = quantity.toString() + " " + card.getCardName();
                 pw.println(cardAsString);
@@ -72,20 +76,20 @@ writeFileAsTextFile(fullPath);
             }
             pw.println("");
             Set sideboardset = deck.getSideboard().keySet();
-            Iterator<Card> sideboardIterator = sideboardset.iterator();
-            HashMap<Card, Integer> sideBoard = deck.getSideboard();
+            Iterator<OracleCard> sideboardIterator = sideboardset.iterator();
+            HashMap<OracleCard, Integer> sideBoard = deck.getSideboard();
             while (sideboardIterator.hasNext()) {
-                Card card = sideboardIterator.next();
+                OracleCard card = sideboardIterator.next();
                 Integer quantity = sideBoard.get(card);
                 String cardAsString = quantity.toString() + " " + card.getCardName();
                 pw.println(cardAsString);
             }
-        }catch(IOException e){throw new FileNotFoundException(""+e); }  
-        catch (NullPointerException ex) {
+        } catch (IOException e) {
+            throw new FileNotFoundException("" + e);
+        } catch (NullPointerException ex) {
             System.out.print("Trying to write a List that does not exist." + ex);
             Logger.getLogger(ListWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally {
+        } finally {
             if (pw != null) {
                 pw.close();
             }

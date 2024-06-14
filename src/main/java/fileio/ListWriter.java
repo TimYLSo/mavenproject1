@@ -42,18 +42,20 @@ public class ListWriter extends CardWriter {
         this.ListToWrite = list;
     }
 
-    public void writeFileAsCSV(String filename, boolean a) throws FileNotFoundException {
+    public void writeFileAsCSV(String filename, boolean a) throws FileNotFoundException, IOException {
         String fullPath = this.getFilePath() + filename + ".csv";
         this.setWholePath(fullPath);
         writeFileAsCSV(fullPath);
     }
 
-    public void writeFileAsCSV(String fullpath) throws FileNotFoundException{ // creates a file in the designated path with the designated filename, if filename already exists, overwrites it.
+    public void writeFileAsCSV(String fullpath) throws FileNotFoundException, IOException,IllegalArgumentException { // creates a file in the designated path with the designated filename, if filename already exists, overwrites it.
         PrintWriter pw = null;
+
         try {
 
             String fullPath = fullpath;
             File textFile = new File(fullPath);
+            System.out.println(textFile);
             textFile.createNewFile();
 
             pw = new PrintWriter(fullPath);
@@ -76,13 +78,15 @@ public class ListWriter extends CardWriter {
             }
             // Write str to the output.txt.
 
-        } catch (IOException ex) {throw new FileNotFoundException(); 
+        } catch (IOException ex) {
+            throw ex;
 
         } catch (NullPointerException ex) {
             System.out.print("Trying to write a List that does not exist." + ex);
             Logger.getLogger(ListWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(IllegalArgumentException e){System.err.print("The csv file is formatted incorrectly, please check the file." + e);} 
-        finally {
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("The csv file is formatted incorrectly, please check the file." + e);
+        } finally {
             if (pw != null) {
                 pw.close();
             }
