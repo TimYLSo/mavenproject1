@@ -29,11 +29,11 @@ public class MtgCardManager {
 public final static DerbyCardDatabase database = new DerbyCardDatabase();
 public static DerbyCollectionsManager collections = new DerbyCollectionsManager(database);
 public static DerbyDecksManager allDecks = new DerbyDecksManager(database);
-
+public static MainFrame menu = new MainFrame();
 
     public static void main(String[] args) {
 
-             MainFrame menu = new MainFrame();
+            
         menu.setVisible(true);
 
     }
