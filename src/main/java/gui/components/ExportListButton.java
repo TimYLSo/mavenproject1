@@ -38,6 +38,7 @@ public class ExportListButton extends PanelButton {
                 ListWriter writer = new ListWriter(filePath, list);
                 writer.writeFileAsCSV(listName, true);
                 JPanel returnPanel = new MainMenu();
+                JOptionPane.showMessageDialog(this, "Operation Complete.");
                 parent.navigate_to_panel(returnPanel);
             } catch (NoSuchElementException ex) {
                 Logger.getLogger(ShowDeckButton.class.getName()).log(Level.SEVERE, null, ex);

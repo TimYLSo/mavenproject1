@@ -6,6 +6,7 @@ package gui.basePanels;
 
 import gui.components.LinkButton;
 import gui.MainMenu;
+import gui.components.QuitButton;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ JPanel navigationPanel = new JPanel();
            setBorder(new EmptyBorder(0, 0, 30, 30));
         navigationPanel.setLayout(new BorderLayout());
         navigationPanel.add(returnButton, BorderLayout.WEST);
+         navigationPanel.add(new QuitButton(), BorderLayout.NORTH);
          mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         

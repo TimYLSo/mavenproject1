@@ -68,7 +68,6 @@ public class ExportDecksPanel extends ExportPanel {
             scrollPane.repaint();
             main.revalidate();
             main.repaint();
-            System.out.println("done");
         } catch (SQLException ex) {
             Logger.getLogger(ViewAllDecksPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

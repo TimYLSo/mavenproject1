@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import models.Deck;
 
@@ -33,6 +34,7 @@ public class ExportDeckButton extends PanelButton {
         DeckWriter writer = new DeckWriter(filePath,deck);
         writer.writeFileAsTextFile(deckName, true);
         JPanel returnPanel = new MainMenu();
+        JOptionPane.showMessageDialog(this, "Operation Complete.");
         parent.navigate_to_panel(returnPanel);
     } catch (NoSuchElementException ex) {
         Logger.getLogger(ShowDeckButton.class.getName()).log(Level.SEVERE, null, ex);
