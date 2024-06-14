@@ -6,6 +6,7 @@ package gui.navigationpanels;
 
 import gui.basePanels.AppPanel;
 import gui.basePanels.ExportPanel;
+import gui.components.ChooseFolderPanel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -14,8 +15,15 @@ import javax.swing.JPanel;
  * @author User
  */
 public class ExportListPanel extends ExportPanel {
-    public ExportListPanel(){
+
+    public ExportListPanel() {
         JPanel main = this.getMainPanel();
-    main.add(new JLabel("Please select the list to export"));
+        main.add(new JLabel("Please select the Location of the exported file and the name"));
+        ChooseFolderPanel panel = new ChooseFolderPanel(this);
+        main.add(panel);
+    }
+
+    @Override
+    public void FolderChosen(String folderPath, String fileName) {
     }
 }

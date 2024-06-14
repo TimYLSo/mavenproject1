@@ -4,6 +4,7 @@
  */
 package gui.basePanels;
 
+import gui.components.ChooseFolderPanel;
 import gui.fileio.FileExporter;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -13,10 +14,20 @@ import javax.swing.JFileChooser;
  * @author User
  */
 public class ExportPanel extends AppPanel {
-        protected String filePath;
-            JFileChooser chooser = new FileExporter();
-            File file = chooser.getSelectedFile();
+
+    protected String folderPath;
+    protected String fileName;
+
     public ExportPanel() {
-        add(chooser);
+
+    }
+
+    public void FolderChosen(String folderPath, String fileName) {
+        this.fileName = fileName;
+        char lastChar = folderPath.charAt(folderPath.length() - 1);
+        if ((lastChar == '\\')|| (lastChar == '/')){this.folderPath = folderPath;}
+        else{this.folderPath = folderPath+"\\";}
+        
+        
     }
 }
