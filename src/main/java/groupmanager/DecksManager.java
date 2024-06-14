@@ -5,7 +5,6 @@
 package groupmanager;
 
 import database.DerbyCardDatabase;
-import database.InMemoryCardDatabase;
 import fileio.DeckWriter;
 import fileio.TextFileCardReader;
 import models.Card;
