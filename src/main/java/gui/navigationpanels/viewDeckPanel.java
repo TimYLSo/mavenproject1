@@ -7,6 +7,7 @@ package gui.navigationpanels;
 import com.mycompany.mtgCardManager.MtgCardManager;
 import gui.basePanels.AppPanel;
 import gui.components.CardLabel;
+import gui.components.ReturnButton;
 import gui.components.ShowDeckButton;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -20,6 +21,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -39,11 +41,11 @@ public class viewDeckPanel extends AppPanel {
     public viewDeckPanel(Deck deck, JPanel originalPanel) {
         super();
         JLabel deckNameLabel = new JLabel("Deck Name: " + deck.getDeckName());
-
+        addButtonToNavPanel(new ReturnButton("return to decks",originalPanel));
         JPanel mainPanel = getMainPanel();
         cardViewer = new JPanel();
         deckViewer = new JPanel();
-        cardViewer.setPreferredSize(new Dimension(200, 200));
+        cardViewer.setPreferredSize(new Dimension(400, 200));
 
         deckViewer.setLayout(new BoxLayout(deckViewer, BoxLayout.Y_AXIS));
         cardViewer.setLayout(new BoxLayout(cardViewer, BoxLayout.Y_AXIS));

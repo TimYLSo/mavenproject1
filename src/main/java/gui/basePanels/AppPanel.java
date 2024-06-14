@@ -8,6 +8,7 @@ import gui.components.LinkButton;
 import gui.MainMenu;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,22 +20,23 @@ import javax.swing.border.EmptyBorder;
 public class AppPanel extends JPanel {
 
     LinkButton returnButton = new LinkButton("Return To Menu", MainMenu.class);
-JPanel topPanel = new JPanel();
+JPanel navigationPanel = new JPanel();
  JPanel mainPanel = new JPanel();
  protected String titleMessage = "Hi this is a panel";
     public AppPanel() {
            setLayout(new BorderLayout(0,30));
            setBorder(new EmptyBorder(0, 0, 30, 30));
-        topPanel.setLayout(new BorderLayout());
-        topPanel.add(returnButton, BorderLayout.WEST);
+        navigationPanel.setLayout(new BorderLayout());
+        navigationPanel.add(returnButton, BorderLayout.WEST);
          mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         
-        add(topPanel, BorderLayout.NORTH);
+        add(navigationPanel, BorderLayout.NORTH);
         add(mainPanel, BorderLayout.CENTER);
         
     }
     public JPanel getMainPanel(){
     return mainPanel;
     }
+    public void addButtonToNavPanel(JButton button){navigationPanel.add(button);}
 }
