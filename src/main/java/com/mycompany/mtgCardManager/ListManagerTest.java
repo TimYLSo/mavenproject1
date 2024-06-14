@@ -32,15 +32,17 @@ public class ListManagerTest {
          String file = "C:\\Users\\User\\Documents\\school\\2024\\pdc\\assignment\\MtgCardManager\\mavenproject1\\src\\files\\CollectionLists\\con binder.csv";
            CSVCardReader reader = new CSVCardReader(file); 
            CollectionList list = reader.readListFromFile("Binder");
-           listsManager.saveList(list);
+//           listsManager.saveList(list);
          ResultSet rs = dbManager.myQuery("Select * from LISTS");
         ResultSet rs2 = dbManager.myQuery("Select * from LISTCARDS");
+        System.out.println(listsManager.getAllLists());
+        System.out.println(listsManager.getAllLists());
          DatabaseMetaData dbmd = cardDB.getConnection().getMetaData();
-        System.out.println("Database product name : " + dbmd.getDatabaseProductName());
-        System.out.println("Database version : " + dbmd.getDatabaseProductVersion());
-        System.out.println("URL: " + dbmd.getURL());
-        System.out.println("driver name: " + dbmd.getDriverName());
-        System.out.println("driver version: " + dbmd.getDriverVersion());
+//        System.out.println("Database product name : " + dbmd.getDatabaseProductName());
+//        System.out.println("Database version : " + dbmd.getDatabaseProductVersion());
+//        System.out.println("URL: " + dbmd.getURL());
+//        System.out.println("driver name: " + dbmd.getDriverName());
+//        System.out.println("driver version: " + dbmd.getDriverVersion());
         ResultSetMetaData rsmd = rs.getMetaData();
         int rowCount = 0;
         while (rs.next()) {

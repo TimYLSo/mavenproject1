@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri Jun 14 18:33:42 NZST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0190-1573-b280-00000ea84928 
+Fri Jun 14 19:14:43 NZST 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0190-1599-3e9f-00000ea84988 
 on database directory C:\Users\User\Documents\school\2024\pdc\assignment\MtgCardManager\mavenproject1\CardCollectionDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
 Loaded from file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation

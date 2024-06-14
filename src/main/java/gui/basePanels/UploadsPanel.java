@@ -13,10 +13,9 @@ import javax.swing.JFileChooser;
  */
 public class UploadsPanel extends AppPanel {
     protected String filePath;
-            JFileChooser chooser = new JFileChooser();
-            File file = chooser.getSelectedFile();
+    protected String fileName;
     public UploadsPanel() {
-        add(chooser);
+        
     }
     
 }
